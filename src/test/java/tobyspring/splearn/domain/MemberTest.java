@@ -3,9 +3,9 @@ package tobyspring.splearn.domain;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static org.assertj.core.api.Assertions.*;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static tobyspring.splearn.domain.Member.*;
 import static tobyspring.splearn.domain.MemberStatus.DEACTIVATED;
 
 class MemberTest {
@@ -26,7 +26,7 @@ class MemberTest {
             }
         };
 
-        member = Member.create("yh@splearn.app", "youngho", "secret", passwordEncoder);
+        member = create(new MemberCreateRequest("yh@splearn.app", "youngho", "secret"), passwordEncoder);
     }
 
     @Test
@@ -87,5 +87,18 @@ class MemberTest {
         member.changePassword("verysecret", passwordEncoder);
 
         assertThat(member.verifyPassword("verysecret", passwordEncoder)).isTrue();
+    }
+
+    @Test
+    void isActive() {
+        assertThat(member.isActive()).isFalse();
+
+        member.activate();
+
+        assertThat(member.isActive()).isTrue();
+
+        member.deactivate();
+
+        assertThat(member.isActive()).isFalse();
     }
 }
