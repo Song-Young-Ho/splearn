@@ -3,7 +3,6 @@ package tobyspring.splearn.application.provided;
 import jakarta.persistence.EntityManager;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.context.annotation.Import;
 import org.springframework.transaction.annotation.Transactional;
 import tobyspring.splearn.SplearnTestConfiguration;
