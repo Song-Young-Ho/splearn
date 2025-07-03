@@ -9,14 +9,13 @@ import org.springframework.transaction.annotation.Transactional;
 import tobyspring.splearn.SplearnTestConfiguration;
 import tobyspring.splearn.domain.*;
 
-import static org.assertj.core.api.Assertions.*;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 @SpringBootTest
 @Import(SplearnTestConfiguration.class)
 @Transactional
-public record MemberRegisterTest(MemberRegister memberRegister, EntityManager entityManager) {
+record MemberRegisterTest(MemberRegister memberRegister, EntityManager entityManager) {
     @Test
     void register() {
         Member member = memberRegister.register(MemberFixture.createMemberRegisterRequest());
@@ -47,12 +46,12 @@ public record MemberRegisterTest(MemberRegister memberRegister, EntityManager en
 
     @Test
     void memberRegisterRequestFail() {
-        extracted(new MemberRegisterRequest("yh@splearn.app", "test", "longsecret"));
-        extracted(new MemberRegisterRequest("yh@splearn.app", "testesttestesttestesttestest", "longsecret"));
-        extracted(new MemberRegisterRequest("yhsplearn.app", "testesttestesttestesttestest", "longsecret"));
+        checkValidation(new MemberRegisterRequest("yh@splearn.app", "test", "longsecret"));
+        checkValidation(new MemberRegisterRequest("yh@splearn.app", "testesttestesttestesttestest", "longsecret"));
+        checkValidation(new MemberRegisterRequest("yhsplearn.app", "testesttestesttestesttestest", "longsecret"));
     }
 
-    private void extracted(MemberRegisterRequest invalid) {
+    private void checkValidation(MemberRegisterRequest invalid) {
         assertThatThrownBy(() -> memberRegister.register(invalid))
                 .isInstanceOf(ConstraintViolationException.class);
     }
