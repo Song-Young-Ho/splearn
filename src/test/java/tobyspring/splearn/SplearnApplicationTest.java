@@ -5,8 +5,6 @@ import org.mockito.MockedStatic;
 import org.mockito.Mockito;
 import org.springframework.boot.SpringApplication;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 class SplearnApplicationTest {
     @Test
     void run() {
