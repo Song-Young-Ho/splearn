@@ -31,7 +31,7 @@ import static tobyspring.AssertThatUtils.notNull;
 @AutoConfigureMockMvc
 @Transactional
 @RequiredArgsConstructor
-public class MemberApiTest {
+class MemberApiTest {
     final MockMvcTester mockMvc;
     final ObjectMapper objectMapper;
     final MemberRepository repository;
